@@ -180,6 +180,18 @@ export default function Component() {
     );
   };
 
+  const handleCreateOrders = (newOrders: MaintenanceOrder[]) => {
+    setOrders((prevOrders) => [
+      ...prevOrders,
+      ...newOrders.map((order) => ({
+        ...order,
+        equipment: order.equipamentos || [], // Certifique-se de que equipamentos estão sendo passados corretamente
+        status: order.status || "A fazer", // Certifique-se de que o status está definido
+        creationDate: order.creationDate || new Date().toLocaleDateString("pt-BR"), // Certifique-se de que a data de criação está definida
+      })),
+    ]);
+  };
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="mb-4 text-2xl font-bold">Ordens de Manutenção</h1>
@@ -194,7 +206,7 @@ export default function Component() {
           <Search className="text-gray-400" />
         </div>
         <MaintenanceOrderDialog onCreateOrder={handleCreateOrder} />
-        <MultiOrderMaintenanceDialog onCreateOrders={handleCreateOrder} />
+        <MultiOrderMaintenanceDialog onCreateOrders={handleCreateOrders} />
       </div>
       <Table>
         <TableHeader>
@@ -218,9 +230,11 @@ export default function Component() {
               <TableCell>{order.title}</TableCell>
               <TableCell>{order.description}</TableCell>
               <TableCell>
-                {order.equipment
-                  .map((eq) => `${eq.name} (${eq.quantity})`)
-                  .join(", ")}
+                {order.equipamentos && order.equipamentos.length > 0
+                  ? order.equipamentos
+                    .map((eq) => `${eq.descricao} (${eq.quantity})`)
+                    .join(", ")
+                  : "Nenhum equipamento selecionado"}
               </TableCell>
               <TableCell>{order.machine.name}</TableCell>
               <TableCell>

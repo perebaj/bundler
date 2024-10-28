@@ -43,6 +43,8 @@ type MaintenanceOrder = {
   equipment: SelectedItem[];
   machine: { id: string; name: string };
   priority: "Baixa" | "Média" | "Alta";
+  taskId?: string; // Adicione taskId se ainda não estiver definido
+  equipamentos?: SelectedItem[]; // Adicione equipamentos se ainda não estiver definido
 };
 
 type ApiOrderData = {
@@ -180,10 +182,25 @@ export default function MultiOrderMaintenanceDialog({
   };
 
   const handleSubmitOrders = () => {
-    onCreateOrders(orders);
+    const creator = {
+      name: "Nome do Criador", // Substitua pelo nome real do criador
+      email: "email@exemplo.com", // Substitua pelo email real do criador
+      avatar: "/caminho/para/avatar.png", // Substitua pelo caminho real do avatar
+    };
+
+    const ordersWithCreator = orders.map((order) => ({
+      ...order,
+      creator, // Adiciona o criador a cada ordem
+      taskId: order.taskId || generateTaskId(), // Gera um taskId se não existir
+      equipamentos: order.equipment.length > 0 ? order.equipment : [], // Certifique-se de que equipamentos estão sendo passados corretamente
+      status: "A fazer", // Defina um status padrão ou baseado em alguma lógica
+      creationDate: new Date().toLocaleDateString("pt-BR"), // Define a data de criação
+    }));
+
+    onCreateOrders(ordersWithCreator);
     setDialogOpen(false);
-    setOrders([]);
-    setCurrentOrderIndex(0);
+    setOrders([]); // Limpa as ordens após o envio
+    setCurrentOrderIndex(0); // Reseta o índice da ordem atual
   };
 
   const handleAudioUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -237,10 +254,15 @@ export default function MultiOrderMaintenanceDialog({
     setIsLoading(false); // Finaliza o loading
   };
 
+  // Função para gerar um taskId (exemplo)
+  const generateTaskId = () => {
+    return `task-${Math.random().toString(36).substr(2, 9)}`; // Gera um ID único
+  };
+
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>
-        <Button>Criar Ordens</Button>
+        <Button>Criar Ordens Audio</Button>
       </DialogTrigger>
       <DialogContent className="flex h-[90vh] w-full max-w-[90vw] flex-col">
         <DialogHeader>
