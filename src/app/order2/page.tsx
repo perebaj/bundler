@@ -38,10 +38,13 @@ import {
   Minus,
 } from "lucide-react";
 import MaintenanceOrderDialog from "./nova-ordem";
+import MultiOrderMaintenanceDialog from "./ordem-audio";
 
 type Equipment = {
   id: string;
   name: string;
+  codigo_sap?: string;
+  descricao?: string;
   quantity: number;
 };
 
@@ -63,11 +66,11 @@ type MaintenanceOrder = {
 };
 
 const mockEquipments: Equipment[] = [
-  { id: "eq1", name: "Caldeira Industrial", quantity: 0 },
-  { id: "eq2", name: "Bomba Hidráulica", quantity: 0 },
-  { id: "eq3", name: "Compressor de Ar", quantity: 0 },
-  { id: "eq4", name: "Motor Elétrico", quantity: 0 },
-  { id: "eq5", name: "Esteira Transportadora", quantity: 0 },
+  { id: "eq1", name: "Caldeira Industrial", quantity: 0, codigo_sap: "123" },
+  { id: "eq2", name: "Bomba Hidráulica", quantity: 0, codigo_sap: "456" },
+  { id: "eq3", name: "Compressor de Ar", quantity: 0, codigo_sap: "789" },
+  { id: "eq4", name: "Motor Elétrico", quantity: 0, codigo_sap: "101" },
+  { id: "eq5", name: "Esteira Transportadora", quantity: 0, codigo_sap: "112" },
 ];
 
 const mockMachines: Machine[] = [
@@ -83,7 +86,14 @@ const mockOrders: MaintenanceOrder[] = [
     id: "TaskID-123781",
     title: "Manutenção caldeira",
     description: "Manutenção preventiva da caldeira principal",
-    equipment: [{ id: "eq1", name: "Caldeira Industrial", quantity: 1 }],
+    equipment: [
+      {
+        id: "eq1",
+        name: "Caldeira Industrial",
+        quantity: 1,
+        codigo_sap: "123",
+      },
+    ],
     machine: { id: "m1", name: "Máquina 1" },
     status: "A fazer",
     creator: {
@@ -102,6 +112,11 @@ export default function Component() {
   const [newOrder, setNewOrder] = useState<Partial<MaintenanceOrder>>({
     equipment: [],
     machine: mockMachines[0],
+    // Add default values for the required properties
+    id: "", // Add default id
+    status: "A fazer", // Add default status
+    creator: { name: "", email: "", avatar: "" }, // Add default creator
+    creationDate: "", // Add default creationDate
   });
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedEquipment, setSelectedEquipment] = useState<Equipment[]>([]);
@@ -112,29 +127,29 @@ export default function Component() {
       order.description.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
-  const handleCreateOrder = (newOrder: MaintenanceOrder) => {
-    // Recebe o novo pedido como argumento
+  const handleCreateOrder = (newOrder: Partial<MaintenanceOrder>) => {
     const createdOrder: MaintenanceOrder = {
       id: `TaskID-${Math.random().toString(36).substr(2, 9)}`,
       title: newOrder.title || "",
       description: newOrder.description || "",
-      equipment: newOrder.equipment.map((eq) => ({
-        // Certifique-se de que a estrutura está correta
-        id: eq.codigo_sap, // Use o campo correto para o id
-        name: eq.descricao, // Use o campo correto para o nome
-        quantity: eq.quantity, // A quantidade do equipamento
-      })),
+      equipment:
+        newOrder.equipment?.map((eq) => ({
+          id: eq.codigo_sap || "",
+          name: eq.descricao || "",
+          quantity: eq.quantity || 0,
+        })) || [],
       machine: newOrder.machine || mockMachines[0],
-      status: "A fazer",
-      creator: {
+      status: newOrder.status || "A fazer",
+      creator: newOrder.creator || {
         name: "Current User",
         email: "user@example.com",
         avatar: "/placeholder.svg?height=32&width=32",
       },
       priority: newOrder.priority || "Baixa",
-      creationDate: new Date().toLocaleDateString("pt-BR"),
+      creationDate:
+        newOrder.creationDate || new Date().toLocaleDateString("pt-BR"),
     };
-    setOrders([...orders, createdOrder]); // Atualiza a lista de ordens
+    setOrders([...orders, createdOrder]);
     setDialogOpen(false);
   };
 
@@ -179,6 +194,7 @@ export default function Component() {
           <Search className="text-gray-400" />
         </div>
         <MaintenanceOrderDialog onCreateOrder={handleCreateOrder} />
+        <MultiOrderMaintenanceDialog onCreateOrders={handleCreateOrder} />
       </div>
       <Table>
         <TableHeader>

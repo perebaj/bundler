@@ -11,10 +11,6 @@ export default function Component() {
         <h1 className="mt-2 text-3xl font-extrabold text-primary-foreground">
           Contact us
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          We are always here to help you with your queries. Feel free to contact
-          us.
-        </p>
         <div className="mt-4 flex justify-center space-x-4">
           <Link
             href="#"
