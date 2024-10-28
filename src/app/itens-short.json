@@ -1,0 +1,94 @@
+{
+    "equipamentos": [
+        {
+            "categoria": "Ferramentas de Corte",
+            "itens": [
+                {
+                    "descricao": "Serra Circular",
+                    "codigo_sap": "MAT001",
+                    "valor_maximo": 10
+                },
+                {
+                    "descricao": "Disco de Corte",
+                    "codigo_sap": "MAT002",
+                    "valor_maximo": 50
+                },
+                {
+                    "descricao": "Serra de Fita",
+                    "codigo_sap": "MAT003",
+                    "valor_maximo": 15
+                },
+                {
+                    "descricao": "Disco de Desbaste",
+                    "codigo_sap": "MAT004",
+                    "valor_maximo": 50
+                },
+                {
+                    "descricao": "Broca de Aço Rápido 10mm",
+                    "codigo_sap": "MAT005",
+                    "valor_maximo": 100
+                },
+                {
+                    "descricao": "Conjunto de Fresas para Usinagem",
+                    "codigo_sap": "MAT006",
+                    "valor_maximo": 20
+                },
+                {
+                    "descricao": "Lâmina de Serra Sabre",
+                    "codigo_sap": "MAT007",
+                    "valor_maximo": 30
+                },
+                {
+                    "descricao": "Lixadeira Angular",
+                    "codigo_sap": "EQP001",
+                    "valor_maximo": 10
+                }
+            ]
+        },
+        {
+            "categoria": "Ferramentas de Medição",
+            "itens": [
+                {
+                    "descricao": "Paquímetro Digital",
+                    "codigo_sap": "MAT101",
+                    "valor_maximo": 15
+                },
+                {
+                    "descricao": "Micrômetro",
+                    "codigo_sap": "MAT102",
+                    "valor_maximo": 15
+                },
+                {
+                    "descricao": "Relógio Comparador",
+                    "codigo_sap": "MAT103",
+                    "valor_maximo": 10
+                },
+                {
+                    "descricao": "Trena de Aço 5m",
+                    "codigo_sap": "MAT104",
+                    "valor_maximo": 25
+                },
+                {
+                    "descricao": "Nível de Bolha",
+                    "codigo_sap": "MAT105",
+                    "valor_maximo": 20
+                },
+                {
+                    "descricao": "Goniômetro Digital",
+                    "codigo_sap": "MAT106",
+                    "valor_maximo": 10
+                },
+                {
+                    "descricao": "Manômetro para Pressão",
+                    "codigo_sap": "MAT107",
+                    "valor_maximo": 10
+                },
+                {
+                    "descricao": "Calibrador de Roscas",
+                    "codigo_sap": "MAT108",
+                    "valor_maximo": 20
+                }
+            ]
+        }
+    ]
+}
