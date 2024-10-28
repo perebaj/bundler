@@ -60,16 +60,7 @@ type MultiOrderMaintenanceDialogProps = {
   onCreateOrders: (orders: MaintenanceOrder[]) => void;
 };
 
-const mockApiData: ApiOrderData[] = [
-  {
-    title: "Ordem de Manutenção 1",
-    description: "Descrição da ordem 1",
-  },
-  {
-    title: "Ordem de Manutenção 2",
-    description: "Descrição da ordem 2 teskjlraslkdj alksj dla",
-  },
-];
+const mockApiData: ApiOrderData[] = [];
 
 export default function MultiOrderMaintenanceDialog({
   onCreateOrders,
