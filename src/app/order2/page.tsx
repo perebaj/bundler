@@ -185,9 +185,10 @@ export default function Component() {
       ...prevOrders,
       ...newOrders.map((order) => ({
         ...order,
-        equipment: order.equipamentos || [], // Certifique-se de que equipamentos estão sendo passados corretamente
+        equipment: order.equipment || [], // Certifique-se de que equipamentos estão sendo passados corretamente
         status: order.status || "A fazer", // Certifique-se de que o status está definido
-        creationDate: order.creationDate || new Date().toLocaleDateString("pt-BR"), // Certifique-se de que a data de criação está definida
+        creationDate:
+          order.creationDate || new Date().toLocaleDateString("pt-BR"), // Certifique-se de que a data de criação está definida
       })),
     ]);
   };
@@ -205,7 +206,7 @@ export default function Component() {
           />
           <Search className="text-gray-400" />
         </div>
-        <MaintenanceOrderDialog onCreateOrder={handleCreateOrder} />
+        {/* <MaintenanceOrderDialog onCreateOrder={handleCreateOrder} /> */}
         <MultiOrderMaintenanceDialog onCreateOrders={handleCreateOrders} />
       </div>
       <Table>
@@ -232,8 +233,8 @@ export default function Component() {
               <TableCell>
                 {order.equipamentos && order.equipamentos.length > 0
                   ? order.equipamentos
-                    .map((eq) => `${eq.descricao} (${eq.quantity})`)
-                    .join(", ")
+                      .map((eq) => `${eq.descricao} (${eq.quantity})`)
+                      .join(", ")
                   : "Nenhum equipamento selecionado"}
               </TableCell>
               <TableCell>{order.machine.name}</TableCell>

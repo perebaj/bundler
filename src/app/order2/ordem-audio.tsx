@@ -238,7 +238,7 @@ export default function MultiOrderMaintenanceDialog({
     ];
 
     // Armazena a resposta mockada
-    setApiResponse(mockApiResponse);
+    setApiResponse(mockApiResponse as any | null);
 
     // Atualiza as ordens com os dados mockados
     const initialOrders = mockApiResponse.map((item) => ({
