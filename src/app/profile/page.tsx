@@ -30,7 +30,7 @@ export default function Page() {
   const handleUpdateProfile = async (data: UpdateProfileForm) => {
     console.log(data);
 
-    router.push("/process");
+    router.push("/order2");
   };
 
   console.log(errors);

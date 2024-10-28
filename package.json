@@ -1,5 +1,5 @@
 {
-  "name": "law-reggae",
+  "name": "bundler",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -19,6 +19,7 @@
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-navigation-menu": "^1.2.0",
     "@radix-ui/react-progress": "^1.1.0",
+    "@radix-ui/react-scroll-area": "^1.2.0",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.1",
@@ -29,7 +30,7 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "framer-motion": "^11.3.24",
     "lucide-react": "^0.424.0",
-    "next": "14.2.5",
+    "next": "^14.2.16",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.52.2",

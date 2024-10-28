@@ -24,7 +24,7 @@ export default function Home() {
           <div className="flex flex-1 justify-end">
             <Button size={"lg"} className="text-lg text-white">
               {/* The first access point to an user is the process page */}
-              <Link href={isSignedIn ? "/process" : "/process"}>Entrar</Link>
+              <Link href={isSignedIn ? "/order2" : "/order2"}>Entrar</Link>
             </Button>
           </div>
         </nav>

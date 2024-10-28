@@ -1,0 +1,15 @@
+{
+    "equipamentos": [
+        {
+            "categoria": "Ferramentas de Corte",
+            "itens": [
+                {
+                    "descricao": "Serra Circular",
+                    "codigo_sap": "MAT001",
+                    "valor_maximo": 10,
+                    "quantidade": 0
+                }
+            ]
+        }
+    ]
+}
